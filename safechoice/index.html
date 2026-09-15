@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111423" />
+  <title>SafeChoice — Interactive Scenario Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">S</span><span>SafeChoice</span></div>
+      <div class="top-note">Private prototype · no login · no data upload</div>
+    </header>
+
+    <main>
+      <section id="start-screen" class="screen active">
+        <div class="hero-shell">
+          <span class="hero-glow g1"></span><span class="hero-glow g2"></span><span class="hero-glow g3"></span>
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow">Interactive scenario game · 4 chapters</span>
+              <h1>Your choices tell a <span class="gradient-text">story.</span></h1>
+              <p class="lead">Step into four real-life situations about boundaries, protection, consent, and online pressure. Choose what you would actually do and see where your decisions lead.</p>
+              <div id="player-entry" class="player-entry">
+                <label class="player-label" for="player-name"><span>Player name</span><span>shown on your final card</span></label>
+                <input id="player-name" class="player-input" type="text" maxlength="24" autocomplete="name" placeholder="Type your name…" aria-describedby="name-error" />
+                <div id="name-error" class="name-error" aria-live="polite"></div>
+              </div>
+              <div class="hero-actions">
+                <button id="start-btn" class="btn btn-primary" type="button">Enter the story →</button>
+                <span class="eyebrow">~2 min · instant feedback</span>
+              </div>
+              <p class="tiny">Educational prototype only. Your result is for reflection and engagement, not a psychological diagnosis. Nothing you type or choose is uploaded by this page.</p>
+            </div>
+            <div class="worlds" aria-label="Mystery result preview">
+              <div class="mystery-stage">
+                <div class="mystery-ring"></div><div class="mystery-ring r2"></div><div class="mystery-ring r3"></div>
+                <div class="mystery-chip mc1">BOUNDARY</div><div class="mystery-chip mc2">TRUST</div><div class="mystery-chip mc3">CHOICE</div><div class="mystery-chip mc4">SAFETY</div>
+                <div class="mystery-card">
+                  <div class="mystery-top">Result locked · SC-??</div>
+                  <div class="mystery-mark">?</div>
+                  <div class="mystery-bottom"><strong>One card is waiting.</strong><small>Make four choices to reveal your personal result.</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz-screen" class="screen">
+        <div class="quiz-shell">
+          <aside class="mission-rail">
+            <h3>Your route</h3>
+            <div id="chapter-list" class="chapter-list"></div>
+            <div class="rail-tip"><strong style="color:#fff">There is no “personality” answer.</strong><br>Choose what you would actually do. The game responds with the likely consequence and one safety skill.</div>
+          </aside>
+
+          <section class="question-panel">
+            <div class="scene-head">
+              <div class="scene-meta"><span id="scene-tag" class="scene-tag">Sexual Risk</span><span id="scene-count" class="scene-count">01 / 04</span></div>
+              <h2 id="question-title">A private invite</h2>
+              <p id="question-prompt" class="prompt"></p>
+            </div>
+            <div class="quiz-body">
+              <div id="choices" class="choices"></div>
+              <div id="feedback-panel" class="feedback" aria-live="polite">
+                <div class="feedback-block"><div class="feedback-label">Possible outcome</div><p id="feedback-result"></p><span id="risk-pill" class="risk-pill">Risk</span></div>
+                <div class="feedback-block"><div class="feedback-label">Skill unlocked</div><p id="feedback-lesson"></p></div>
+              </div>
+              <div class="quiz-footer">
+                <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+                <button id="next-btn" class="btn btn-ghost next-btn" type="button">Next chapter →</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="result-screen" class="screen">
+        <div class="result-layout">
+          <article id="share-card" class="share-card">
+            <div class="share-inner">
+              <div class="card-kicker"><span>SAFECHOICE · THAI WILD ARCHETYPE</span><span id="card-code" class="card-code">SC-01</span></div>
+              <div class="art-stage"><div class="halo"></div><div id="animal-shadow" class="animal-shadow"></div><div id="result-symbol" class="animal-glyph">🐉</div></div>
+              <div class="result-copy">
+                <div id="result-player-name" class="result-player">FOR PLAYER</div>
+                <h2 id="result-name">The Guardian</h2>
+                <div id="result-local" class="thai-name">ม้านิลมังกร</div>
+                <p id="result-tagline" class="tagline"></p>
+                <div id="trait-row" class="trait-row"></div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="result-side">
+            <section class="info-card"><h3>Your pattern</h3><p><strong id="result-strength-title">Strength</strong><br><span id="result-description"></span></p><p style="margin-top:12px"><strong>Watch for</strong><br><span id="result-caution"></span></p></section>
+            <section class="info-card"><h3>Decision mix</h3><div id="score-grid" class="score-grid"></div></section>
+            <section class="info-card action-card">
+              <h3>Keep your card</h3>
+              <div class="action-grid">
+                <button id="save-png-btn" class="btn btn-save" type="button">↓ Save PNG</button>
+                <button id="share-btn" class="btn btn-share" type="button">↗ Share Result</button>
+                <button id="restart-btn" class="btn btn-restart wide" type="button">↻ Play again</button>
+              </div>
+              <p class="disclaimer" style="margin-top:14px">MBTI-inspired for engagement only. No answers are uploaded or stored by this page.</p>
+            </section>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite">Saved</div>
+
+  <script src="app.js"></script>
+</body>
+</html>
